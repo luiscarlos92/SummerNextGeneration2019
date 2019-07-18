@@ -1,7 +1,75 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
-
-/.vs
-/bin
-/obj
+﻿# ##################
+# source compilado #
+# ##################
+* .com
+* .class
+* .dll
+* .exe
+* .pdb
+* .dll.config
+* .cache
+* .suo
+# Incluir dlls se estiverem no diretório de pacotes do NuGet
+! / packages / * / lib / * .dll
+! / packages / * / lib / * / * .dll
+# Include dlls se estiverem no diretório CommonReferences
+! * CommonReferences / * .dll
+# ###################
+# VS Faça o upgrade das coisas #
+# ###################
+UpgradeLog.XML
+_UpgradeReport_Files /
+# ##############
+# Diretórios #
+# ##############
+bin /
+obj /
+TestResults /
+# ##################
+# Web publish log #
+# ##################
+* .Publish.xml
+# ############
+# Resharper #
+# ############
+/ _ReSharper. *
+* ReSharper *
+# ###########
+# Packages #
+# ###########
+# é melhor descompactar esses arquivos e confirmar a origem bruta
+# git tem seus próprios métodos de compactação
+* .7z
+* .dmg
+* .gz
+* .iso
+* .jar
+* .rar
+* .tar
+* .zip
+# #####################
+# Logs e bancos de dados #
+# #####################
+* .log
+* .sqlite
+# Arquivos gerados pelo SO #
+# #####################
+.DS_Store ?
+ehthumbs.db
+Ícone ?
+Thumbs.db
+[ Bb ] em
+[ Oo ] bj
+[ Tt ] est [ Rr ] resultados
+* .suo
+* .user
+* . [ Cc ] dor
+* [ Rr ] esarpador *
+pacotes
+NuGet.exe
+_ [ Ss ] cripts
+* .exe
+* .dll
+* .nupkg
+* .ncrunchsolution
+* .dot [ Cc ] over
