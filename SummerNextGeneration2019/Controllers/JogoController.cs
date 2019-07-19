@@ -33,5 +33,11 @@ namespace SummerNextGeneration2019.Controllers
             }
             return RedirectToAction("Tabuleiro");
         }
+
+        public ActionResult Reiniciar()
+        {
+            GameLogic.ReiniciarJogo();
+            return RedirectToAction("Tabuleiro");
+        }
     }
 }

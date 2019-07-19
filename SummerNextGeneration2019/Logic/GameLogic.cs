@@ -7,8 +7,9 @@ namespace SummerNextGeneration2019.Logic
 {
     public static class GameLogic
     {
-        public static int PontosJogador1 = 4000;
-        public static int PontosJogador2 = 4000;
+        public const int PONTOSINICIAIS = 4000;
+        public static int PontosJogador1 = PONTOSINICIAIS;
+        public static int PontosJogador2 = PONTOSINICIAIS;
 
         public static void SubtrairPontos(int numeroJogador, int pontosDeAtaque)
         {   
@@ -26,6 +27,12 @@ namespace SummerNextGeneration2019.Logic
                 if (PontosJogador2 < 0)
                     PontosJogador2 = 0;
             }
+        }
+
+        public static void ReiniciarJogo()
+        {
+            PontosJogador1 = PONTOSINICIAIS;
+            PontosJogador2 = PONTOSINICIAIS;
         }
     }
 }

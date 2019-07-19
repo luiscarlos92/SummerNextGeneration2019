@@ -7,30 +7,45 @@
 
 <h2>Tabuleiro</h2>
 <div class="row">
-    Jogador 1: <input type="text" name="Jogador1" value=@ViewBag.PontosJogador1 disabled><br>
-    Jogador 2: <input type="text" name="Jogador2" value=@ViewBag.PontosJogador2 disabled><br>
+    <div class="col-lg-6">
+        <div>
+            Jogador 1: <input type="text" name="Jogador1" value=@ViewBag.PontosJogador1 disabled><br>
+            Jogador 2: <input type="text" name="Jogador2" value=@ViewBag.PontosJogador2 disabled><br>
+        </div>
+
+        <br />
+
+        @using (Html.BeginForm("Atacar", "Jogo", FormMethod.Post))
+        {
+            <div>
+                <table>
+                    <tr>
+                        <th>Pontos de ataque do monstro</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.EditorFor(m => m.Dano, new { htmlAttributes = new { @min = "0", @max = Int32.MaxValue } })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Atacar Quem?</th>
+                    </tr>
+                    <tr>
+                        <td> @Html.RadioButtonFor(m => m.Jogador, 1)P1</td>
+                        <td> @Html.RadioButtonFor(m => m.Jogador, 2)P2</td>
+                    </tr>
+                </table>
+                <button type="submit" value="Atacar">Atacar</button>
+            </div>
+        }
+    </div>
+
+    @using (Html.BeginForm("Reiniciar", "Jogo", FormMethod.Post))
+    {
+        //reset
+        <div class="col-lg-6">
+            <button type="submit" class="pull-right">Reiniciar</button>
+        </div>
+    }
+
 </div>
-<br />
-@using (Html.BeginForm("Atacar", "Jogo", FormMethod.Post))
-{
-<div class="row">
-    <table>
-        <tr>
-            <th>Pontos de ataque do monstro</th>
-        </tr>
-        <tr>
-            <td>
-                @Html.EditorFor(m => m.Dano, new { htmlAttributes = new { @min = "0", @max = "10000" } })
-            </td>
-        </tr>
-        <tr>
-            <th>Atacar Quem?</th>
-        </tr>
-        <tr>
-            <td> @Html.RadioButtonFor(m => m.Jogador, 1)P1</td>
-            <td> @Html.RadioButtonFor(m => m.Jogador, 2)P2</td>        
-        </tr>
-    </table>
-    <button type="submit" value="Atacar">Atacar</button>
-</div>
-}
