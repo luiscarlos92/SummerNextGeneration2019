@@ -1,4 +1,5 @@
 ﻿using SummerNextGeneration2019.Logic;
+using SummerNextGeneration2019.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +16,22 @@ namespace SummerNextGeneration2019.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Tabuleiro()
         {
             ViewBag.PontosJogador1 = GameLogic.PontosJogador1;
             ViewBag.PontosJogador2 = GameLogic.PontosJogador2;
 
-            return View();
+            return View(new Ataque());
         }
 
+        [HttpPost]
+        public ActionResult Atacar(Ataque ataque)
+        {
+            if (ModelState.IsValid) { 
+                GameLogic.SubtrairPontos(ataque.Jogador, ataque.Dano);
+            }
+            return RedirectToAction("Tabuleiro");
+        }
     }
 }

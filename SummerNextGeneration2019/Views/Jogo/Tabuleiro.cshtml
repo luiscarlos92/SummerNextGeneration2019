@@ -1,4 +1,5 @@
-﻿
+﻿@model SummerNextGeneration2019.Models.Ataque
+
 @{
     ViewBag.Title = "Tabuleiro";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,4 +9,28 @@
 <div class="row">
     Jogador 1: <input type="text" name="Jogador1" value=@ViewBag.PontosJogador1 disabled><br>
     Jogador 2: <input type="text" name="Jogador2" value=@ViewBag.PontosJogador2 disabled><br>
-    </div>
+</div>
+<br />
+@using (Html.BeginForm("Atacar", "Jogo", FormMethod.Post))
+{
+<div class="row">
+    <table>
+        <tr>
+            <th>Pontos de ataque do monstro</th>
+        </tr>
+        <tr>
+            <td>
+                @Html.EditorFor(m => m.Dano, new { htmlAttributes = new { @min = "0", @max = "10000" } })
+            </td>
+        </tr>
+        <tr>
+            <th>Atacar Quem?</th>
+        </tr>
+        <tr>
+            <td> @Html.RadioButtonFor(m => m.Jogador, 1)P1</td>
+            <td> @Html.RadioButtonFor(m => m.Jogador, 2)P2</td>        
+        </tr>
+    </table>
+    <button type="submit" value="Atacar">Atacar</button>
+</div>
+}
