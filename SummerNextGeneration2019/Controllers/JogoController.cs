@@ -19,8 +19,11 @@ namespace SummerNextGeneration2019.Controllers
         [HttpGet]
         public ActionResult Tabuleiro()
         {
+            if (GameLogic.JogadorAtual == -1)
+                GameLogic.ReiniciarJogo();
             ViewBag.PontosJogador1 = GameLogic.PontosJogador1;
             ViewBag.PontosJogador2 = GameLogic.PontosJogador2;
+            ViewBag.JogadorAtual = GameLogic.JogadorAtual;
 
             return View(new Ataque());
         }
@@ -29,7 +32,7 @@ namespace SummerNextGeneration2019.Controllers
         public ActionResult Atacar(Ataque ataque)
         {
             if (ModelState.IsValid) { 
-                GameLogic.SubtrairPontos(ataque.Jogador, ataque.Dano);
+                GameLogic.SubtrairPontos(ataque.Dano);
             }
             return RedirectToAction("Tabuleiro");
         }
@@ -39,5 +42,10 @@ namespace SummerNextGeneration2019.Controllers
             GameLogic.ReiniciarJogo();
             return RedirectToAction("Tabuleiro");
         }
-    }
+        public ActionResult FinalizarTurno()
+        {
+            GameLogic.FinalizarTurno();
+            return RedirectToAction("Tabuleiro");
+        }
+        }
 }

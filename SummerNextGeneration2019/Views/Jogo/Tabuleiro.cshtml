@@ -11,6 +11,8 @@
         <div class="col-xs-3">
             Jogador 1: <input type="text" name="Jogador1" value=@ViewBag.PontosJogador1 disabled><br>
             Jogador 2: <input type="text" name="Jogador2" value=@ViewBag.PontosJogador2 disabled><br>
+            <br>
+            Jogador Atual: <input type="text" name="JogadorAtual" value=@ViewBag.JogadorAtual disabled><br>
         </div>
 
         @using (Html.BeginForm("Atacar", "Jogo", FormMethod.Post))
@@ -24,24 +26,24 @@
                         <td>
                             @Html.EditorFor(m => m.Dano, new { htmlAttributes = new { @min = "0", @max = Int32.MaxValue } })
                         </td>
-                    </tr>                 
-                </table>
-            </div>
-
-            <div class="col-xs-3">
-                <table>                                     
-                    <tr>
-                        <th>Atacar Quem?</th>
-                    </tr>
-                    <tr>
-                        <td> @Html.RadioButtonFor(m => m.Jogador, 1)P1</td>
-                        <td> @Html.RadioButtonFor(m => m.Jogador, 2)P2</td>
                     </tr>
                 </table>
+                <br />
                 <button type="submit" value="Atacar">Atacar</button>
             </div>
 
         }
+        <div class="col-xs-3">
+            @using (Html.BeginForm("FinalizarTurno", "Jogo", FormMethod.Post))
+            {
+                <button type="submit" value="FinalizarTurno">Finalizar Turno</button>
+            }
+
+
+        </div>
+
+
+
     </div>
 
     @using (Html.BeginForm("Reiniciar", "Jogo", FormMethod.Post))

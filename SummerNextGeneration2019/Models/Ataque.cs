@@ -10,8 +10,5 @@ namespace SummerNextGeneration2019.Models
     {
         [Range(0,Int32.MaxValue)]
         public int Dano { get; set; }
-
-        [Range(1, 2)]
-        public int Jogador { get; set; }
     }
 }

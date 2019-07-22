@@ -10,10 +10,11 @@ namespace SummerNextGeneration2019.Logic
         public const int PONTOSINICIAIS = 4000;
         public static int PontosJogador1 = PONTOSINICIAIS;
         public static int PontosJogador2 = PONTOSINICIAIS;
+        public static int JogadorAtual = -1;
 
-        public static void SubtrairPontos(int numeroJogador, int pontosDeAtaque)
+        public static void SubtrairPontos(int pontosDeAtaque)
         {   
-            if (numeroJogador == 1) 
+            if (JogadorAtual == 2) 
             {
                 PontosJogador1 -= pontosDeAtaque;
                 if (PontosJogador1 < 0)
@@ -21,7 +22,7 @@ namespace SummerNextGeneration2019.Logic
 
             }
             else
-                if(numeroJogador == 2)
+                if(JogadorAtual == 1)
             {
                 PontosJogador2 -= pontosDeAtaque;
                 if (PontosJogador2 < 0)
@@ -33,6 +34,17 @@ namespace SummerNextGeneration2019.Logic
         {
             PontosJogador1 = PONTOSINICIAIS;
             PontosJogador2 = PONTOSINICIAIS;
+            Random rnd = new Random();
+            JogadorAtual = rnd.Next(1, 3);
+        }
+
+        internal static void FinalizarTurno()
+        {
+            if (JogadorAtual == 1)
+                JogadorAtual = 2;
+            else
+                if(JogadorAtual == 2)
+                JogadorAtual = 1;
         }
     }
 }
