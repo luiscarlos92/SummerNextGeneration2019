@@ -15,14 +15,14 @@ namespace SummerNextGeneration2019.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Contacto dos jovens programadores.";
 
             return View();
         }
