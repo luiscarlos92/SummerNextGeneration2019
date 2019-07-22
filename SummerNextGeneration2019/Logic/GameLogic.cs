@@ -12,19 +12,31 @@ namespace SummerNextGeneration2019.Logic
         public static int PontosJogador2 = PONTOSINICIAIS;
         public static int JogadorAtual = -1;
 
-        public static void SubtrairPontos(int pontosDeAtaque)
-        {   
-            if (JogadorAtual == 2) 
+        public static void SubtrairPontos(int pontosDeAtaque, int pontosDeBloqueio)
+        {
+            int jogadorQueLevouNaBoca = JogadorAtual;
+            int danosaojogador = pontosDeAtaque - pontosDeBloqueio;
+            if (danosaojogador < 0)
             {
-                PontosJogador1 -= pontosDeAtaque;
+                danosaojogador *= -1;
+                if (jogadorQueLevouNaBoca == 1)
+                    jogadorQueLevouNaBoca = 2;
+                else
+                   if (jogadorQueLevouNaBoca == 2)
+                    jogadorQueLevouNaBoca = 1;
+            }
+
+            if (jogadorQueLevouNaBoca == 2) 
+            {
+                PontosJogador1 -= danosaojogador;
                 if (PontosJogador1 < 0)
                     PontosJogador1 = 0;
 
             }
             else
-                if(JogadorAtual == 1)
+                if(jogadorQueLevouNaBoca == 1)
             {
-                PontosJogador2 -= pontosDeAtaque;
+                PontosJogador2 -= danosaojogador;
                 if (PontosJogador2 < 0)
                     PontosJogador2 = 0;
             }

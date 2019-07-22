@@ -32,7 +32,7 @@ namespace SummerNextGeneration2019.Controllers
         public ActionResult Atacar(Ataque ataque)
         {
             if (ModelState.IsValid) { 
-                GameLogic.SubtrairPontos(ataque.Dano);
+                GameLogic.SubtrairPontos(ataque.Dano, ataque.Bloqueio);
             }
             return RedirectToAction("Tabuleiro");
         }
