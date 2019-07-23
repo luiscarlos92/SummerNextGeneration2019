@@ -25,6 +25,7 @@ namespace SummerNextGeneration2019.Controllers
             ViewBag.PontosJogador1 = GameLogic.PontosJogador1;
             ViewBag.PontosJogador2 = GameLogic.PontosJogador2;
             ViewBag.JogadorAtual = GameLogic.JogadorAtual;
+            ViewBag.JogoTerminado = GameLogic.JogoTerminado;
 
             GetFeedbackFromLogic();
             ViewBag.Feedback = new List<string>(Feedback);
@@ -35,6 +36,11 @@ namespace SummerNextGeneration2019.Controllers
         [HttpPost]
         public ActionResult Atacar(Ataque ataque)
         {
+            if (GameLogic.JogoTerminado)
+            {
+                Feedback.Add("Jogo Terminado, por favor reinicie");
+            }
+            else
             if (ataque.Dano <= 0)
             {
                 Feedback.Add("Por Favor, insira dano");
@@ -54,6 +60,11 @@ namespace SummerNextGeneration2019.Controllers
         }
         public ActionResult FinalizarTurno()
         {
+            if (GameLogic.JogoTerminado)
+            {
+                Feedback.Add("Jogo Terminado, por favor reinicie");
+            }
+            else
             GameLogic.FinalizarTurno();
             return RedirectToAction("Tabuleiro");
         }

@@ -14,6 +14,7 @@ namespace SummerNextGeneration2019.Logic
         public static int PontosJogador1 = PONTOSINICIAIS;
         public static int PontosJogador2 = PONTOSINICIAIS;
         public static int JogadorAtual = -1;
+        public static bool JogoTerminado = false;
 
         public static void LogicaDeAtaque(Ataque ataque)
         {
@@ -57,17 +58,24 @@ namespace SummerNextGeneration2019.Logic
                 PontosJogador1 -= pontos;
 
                 Feedback.Add("Jogador 1 perdeu " + pontos +  " pontos");
-                if (PontosJogador1 < 0)
+                if (PontosJogador1 <= 0)
+                {
                     PontosJogador1 = 0;
-
+                    Feedback.Add("Jogador 2 venceu a partida!");
+                    JogoTerminado = true;
+                }
             }
             else
                     if (numerodejogador == 2)
             {
                 PontosJogador2 -= pontos;
                 Feedback.Add("Jogador 2 perdeu " + pontos + " pontos");
-                if (PontosJogador2 < 0)
+                if (PontosJogador2 <= 0)
+                {
                     PontosJogador2 = 0;
+                    Feedback.Add("Jogador 1 venceu a partida!");
+                    JogoTerminado = true;
+                }  
             }
         }
         public static void SubtrairPontos(int pontosDeAtaque, int pontosDeBloqueio, int modoBloqueio, bool ataqueDireto)
@@ -113,6 +121,7 @@ namespace SummerNextGeneration2019.Logic
             PontosJogador2 = PONTOSINICIAIS;
             Random rnd = new Random();
             JogadorAtual = rnd.Next(1, 3);
+            JogoTerminado = false;
         }
 
         internal static void FinalizarTurno()
