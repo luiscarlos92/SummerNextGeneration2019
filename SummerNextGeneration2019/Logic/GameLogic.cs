@@ -8,6 +8,8 @@ namespace SummerNextGeneration2019.Logic
 {
     public static class GameLogic
     {
+        public static List<string> Feedback = new List<string>();
+
         public const int PONTOSINICIAIS = 4000;
         public static int PontosJogador1 = PONTOSINICIAIS;
         public static int PontosJogador2 = PONTOSINICIAIS;
@@ -15,20 +17,32 @@ namespace SummerNextGeneration2019.Logic
 
         public static void LogicaDeAtaque(Ataque ataque)
         {
-            if (ataque.ModoBloqueio==0 ||
+            if (ataque.ModoBloqueio == 0 ||
                 (ataque.Dano > ataque.Bloqueio && ataque.ModoBloqueio == 1))
             {
                 ReduzDanoAdversario(ataque);
+            }
+            else
+                if (ataque.Dano > ataque.Bloqueio && ataque.ModoBloqueio == 2)
+            {
+                Feedback.Add("Monstro bloqueante destruido");
             }
             else
                 if (ataque.Bloqueio > ataque.Dano)
             {
                 ReduzMeuDano(ataque);
             }
+            else
+                if (ataque.Dano == ataque.Bloqueio && ataque.ModoBloqueio == 1)
+                Feedback.Add("Ambos os Monstros destruidos");
         }
         private static void ReduzDanoAdversario(Ataque ataque)
         {
             int diferencadepontos = (ataque.ModoBloqueio!=0) ? ataque.Dano - ataque.Bloqueio : ataque.Dano;
+
+            if (ataque.ModoBloqueio == 1)
+                Feedback.Add("Monstro bloqueante destruido");
+
             ReduzPontosDeJogador(JogadorAtual == 1 ? 2 : 1, diferencadepontos);
         }
         private static void ReduzMeuDano(Ataque ataque)
@@ -41,6 +55,8 @@ namespace SummerNextGeneration2019.Logic
             if (numerodejogador == 1)
             {
                 PontosJogador1 -= pontos;
+
+                Feedback.Add("Jogador 1 perdeu " + pontos +  " pontos");
                 if (PontosJogador1 < 0)
                     PontosJogador1 = 0;
 
@@ -49,6 +65,7 @@ namespace SummerNextGeneration2019.Logic
                     if (numerodejogador == 2)
             {
                 PontosJogador2 -= pontos;
+                Feedback.Add("Jogador 2 perdeu " + pontos + " pontos");
                 if (PontosJogador2 < 0)
                     PontosJogador2 = 0;
             }

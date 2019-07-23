@@ -10,6 +10,7 @@ namespace SummerNextGeneration2019.Controllers
 {
     public class JogoController : Controller
     {
+        public static List<string> Feedback = new List<string>();
         // GET: Jogo
         public ActionResult Index()
         {
@@ -25,13 +26,22 @@ namespace SummerNextGeneration2019.Controllers
             ViewBag.PontosJogador2 = GameLogic.PontosJogador2;
             ViewBag.JogadorAtual = GameLogic.JogadorAtual;
 
+            GetFeedbackFromLogic();
+            ViewBag.Feedback = new List<string>(Feedback);
+            Feedback.Clear();
             return View(new Ataque());
         }
 
         [HttpPost]
         public ActionResult Atacar(Ataque ataque)
         {
-            if (ModelState.IsValid) {
+            if (ataque.Dano <= 0)
+            {
+                Feedback.Add("Por Favor, insira dano");
+            }
+            else
+               if (ModelState.IsValid)
+            {
                 GameLogic.LogicaDeAtaque(ataque);
             }
             return RedirectToAction("Tabuleiro");
@@ -47,5 +57,11 @@ namespace SummerNextGeneration2019.Controllers
             GameLogic.FinalizarTurno();
             return RedirectToAction("Tabuleiro");
         }
+
+        private void GetFeedbackFromLogic()
+        {
+            Feedback.AddRange(GameLogic.Feedback);
+            GameLogic.Feedback.Clear();
         }
+    }
 }

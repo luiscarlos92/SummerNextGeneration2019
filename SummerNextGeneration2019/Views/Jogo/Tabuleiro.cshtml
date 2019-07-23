@@ -19,27 +19,27 @@
 
             @using (Html.BeginForm("Atacar", "Jogo", FormMethod.Post))
             {
-            <table>
-                <tr>
-                    <th>Pontos de ataque do monstro</th>
-                </tr>
-                <tr>
-                    <td>
-                        @Html.EditorFor(m => m.Dano, new { htmlAttributes = new { @min = "0", @max = Int32.MaxValue } })
-                    </td>
-                </tr>
-                <tr>
-                    <th>Pontos de bloqueio do monstro</th>
-                </tr>
-                <tr>
-                    <td>
-                        @Html.EditorFor(m => m.Bloqueio, new { htmlAttributes = new { @min = "0", @max = Int32.MaxValue } })
-                    </td>
-                    <td> @Html.RadioButtonFor(m => m.ModoBloqueio, 0)Sem  Bloqueio</td>
-                    <td> @Html.RadioButtonFor(m => m.ModoBloqueio, 1)Atk</td>
-                    <td> @Html.RadioButtonFor(m => m.ModoBloqueio, 2)Def</td>
-                </tr>               
-            </table>
+                <table>
+                    <tr>
+                        <th>Pontos de ataque do monstro</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.EditorFor(m => m.Dano, new { htmlAttributes = new { @min = "0", @max = Int32.MaxValue } })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Pontos de bloqueio do monstro</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.EditorFor(m => m.Bloqueio, new { htmlAttributes = new { @min = "0", @max = Int32.MaxValue } })
+                        </td>
+                        <td> @Html.RadioButtonFor(m => m.ModoBloqueio, 0)Sem  Bloqueio</td>
+                        <td> @Html.RadioButtonFor(m => m.ModoBloqueio, 1)Atk</td>
+                        <td> @Html.RadioButtonFor(m => m.ModoBloqueio, 2)Def</td>
+                    </tr>
+                </table>
                 <br />
                 <button type="submit" value="Atacar">Atacar</button>
             }
@@ -59,4 +59,19 @@
         </div>
     }
 
+</div>
+<br />
+<div class="row">
+    @if (ViewBag.Feedback.Count > 0)
+    {
+        <label>Histórico</label>
+    }
+    <ul>
+        @foreach (var mensagem in ViewBag.Feedback)
+        {
+            <li>
+                @mensagem
+            </li>
+        }
+    </ul>
 </div>
