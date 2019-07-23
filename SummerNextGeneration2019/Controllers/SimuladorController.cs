@@ -8,12 +8,12 @@ using System.Web.Mvc;
 
 namespace SummerNextGeneration2019.Controllers
 {
-    public class JogoController : Controller
+    public class SimuladorController : Controller
     {
         public static List<string> Feedback = new List<string>();
 
         [HttpGet]
-        public ActionResult Jogo()
+        public ActionResult Simulador()
         {
             if (GameLogic.JogadorAtual == -1)
                 GameLogic.ReiniciarJogo();
@@ -45,13 +45,13 @@ namespace SummerNextGeneration2019.Controllers
             {
                 GameLogic.LogicaDeAtaque(ataque);
             }
-            return RedirectToAction("Jogo");
+            return RedirectToAction("Simulador");
         }
 
         public ActionResult Reiniciar()
         {
             GameLogic.ReiniciarJogo();
-            return RedirectToAction("Jogo");
+            return RedirectToAction("Simulador");
         }
         public ActionResult FinalizarTurno()
         {
@@ -61,7 +61,7 @@ namespace SummerNextGeneration2019.Controllers
             }
             else
             GameLogic.FinalizarTurno();
-            return RedirectToAction("Jogo");
+            return RedirectToAction("Simulador");
         }
 
         private void GetFeedbackFromLogic()

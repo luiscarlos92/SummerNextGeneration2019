@@ -1,0 +1,77 @@
+﻿@model SummerNextGeneration2019.Models.Ataque
+
+@{
+    ViewBag.Title = "Jogo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tabuleiro</h2>
+<div class="row">
+    <div>
+        <div class="col-xs-5">
+            Jogador 1: <input type="text" name="Jogador1" value=@ViewBag.PontosJogador1 disabled><br>
+            Jogador 2: <input type="text" name="Jogador2" value=@ViewBag.PontosJogador2 disabled><br>
+            <br>
+            Jogador Atual: <input type="text" name="JogadorAtual" value=@ViewBag.JogadorAtual disabled><br>
+        </div>
+
+        <div class="col-xs-5">
+
+            @using (Html.BeginForm("Atacar", "Jogo", FormMethod.Post))
+            {
+                <table>
+                    <tr>
+                        <th>Pontos de ataque do monstro</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.EditorFor(m => m.Dano, new { htmlAttributes = new { @min = "0", @max = Int32.MaxValue } })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Pontos de bloqueio do monstro</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.EditorFor(m => m.Bloqueio, new { htmlAttributes = new { @min = "0", @max = Int32.MaxValue } })
+                        </td>
+                        <td> @Html.RadioButtonFor(m => m.ModoBloqueio, 0)Sem  Bloqueio</td>
+                        <td> @Html.RadioButtonFor(m => m.ModoBloqueio, 1)Atk</td>
+                        <td> @Html.RadioButtonFor(m => m.ModoBloqueio, 2)Def</td>
+                    </tr>
+                </table>
+                <br />
+                <button type="submit" value="Atacar">Atacar</button>
+            }
+            <br />
+            @using (Html.BeginForm("FinalizarTurno", "Jogo", FormMethod.Post))
+            {
+                <button type="submit" value="FinalizarTurno">Finalizar Turno</button>
+            }
+        </div>
+    </div>
+
+    @using (Html.BeginForm("Reiniciar", "Jogo", FormMethod.Post))
+    {
+        //reset
+        <div class="col-xs-2">
+            <button type="submit" class="pull-right">Reiniciar</button>
+        </div>
+    }
+
+</div>
+<br />
+<div class="row">
+    @if (ViewBag.Feedback.Count > 0)
+    {
+        <label>Histórico</label>
+    }
+    <ul>
+        @foreach (var mensagem in ViewBag.Feedback)
+        {
+            <li>
+                @mensagem
+            </li>
+        }
+    </ul>
+</div>
