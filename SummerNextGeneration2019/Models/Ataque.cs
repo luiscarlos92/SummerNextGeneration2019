@@ -13,5 +13,12 @@ namespace SummerNextGeneration2019.Models
 
         [Range(0, Int32.MaxValue)]
         public int Bloqueio { get; set; }
+
+        [Range(0, 2)]
+        public int ModoBloqueio { get; set; }
+
+        
+        
+
     }
 }

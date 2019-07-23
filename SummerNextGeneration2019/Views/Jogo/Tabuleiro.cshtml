@@ -35,7 +35,10 @@
                     <td>
                         @Html.EditorFor(m => m.Bloqueio, new { htmlAttributes = new { @min = "0", @max = Int32.MaxValue } })
                     </td>
-                </tr>
+                    <td> @Html.RadioButtonFor(m => m.ModoBloqueio, 0)Sem  Bloqueio</td>
+                    <td> @Html.RadioButtonFor(m => m.ModoBloqueio, 1)Atk</td>
+                    <td> @Html.RadioButtonFor(m => m.ModoBloqueio, 2)Def</td>
+                </tr>               
             </table>
                 <br />
                 <button type="submit" value="Atacar">Atacar</button>

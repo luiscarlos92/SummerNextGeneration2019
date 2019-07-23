@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SummerNextGeneration2019.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,8 +13,49 @@ namespace SummerNextGeneration2019.Logic
         public static int PontosJogador2 = PONTOSINICIAIS;
         public static int JogadorAtual = -1;
 
-        public static void SubtrairPontos(int pontosDeAtaque, int pontosDeBloqueio)
+        public static void LogicaDeAtaque(Ataque ataque)
         {
+            if (ataque.ModoBloqueio==0 ||
+                (ataque.Dano > ataque.Bloqueio && ataque.ModoBloqueio == 1))
+            {
+                ReduzDanoAdversario(ataque);
+            }
+            else
+                if (ataque.Bloqueio > ataque.Dano)
+            {
+                ReduzMeuDano(ataque);
+            }
+        }
+        private static void ReduzDanoAdversario(Ataque ataque)
+        {
+            int diferencadepontos = (ataque.ModoBloqueio!=0) ? ataque.Dano - ataque.Bloqueio : ataque.Dano;
+            ReduzPontosDeJogador(JogadorAtual == 1 ? 2 : 1, diferencadepontos);
+        }
+        private static void ReduzMeuDano(Ataque ataque)
+        {
+            int diferencadepontos = ataque.Bloqueio - ataque.Dano;
+            ReduzPontosDeJogador(JogadorAtual, diferencadepontos);
+        }
+        private static void ReduzPontosDeJogador(int numerodejogador, int pontos)
+        {
+            if (numerodejogador == 1)
+            {
+                PontosJogador1 -= pontos;
+                if (PontosJogador1 < 0)
+                    PontosJogador1 = 0;
+
+            }
+            else
+                    if (numerodejogador == 2)
+            {
+                PontosJogador2 -= pontos;
+                if (PontosJogador2 < 0)
+                    PontosJogador2 = 0;
+            }
+        }
+        public static void SubtrairPontos(int pontosDeAtaque, int pontosDeBloqueio, int modoBloqueio, bool ataqueDireto)
+        {
+            
             int jogadorQueLevouNaBoca = JogadorAtual;
             int danosaojogador = pontosDeAtaque - pontosDeBloqueio;
             if (danosaojogador < 0)
@@ -26,19 +68,25 @@ namespace SummerNextGeneration2019.Logic
                     jogadorQueLevouNaBoca = 1;
             }
 
-            if (jogadorQueLevouNaBoca == 2) 
-            {
-                PontosJogador1 -= danosaojogador;
-                if (PontosJogador1 < 0)
-                    PontosJogador1 = 0;
 
-            }
-            else
-                if(jogadorQueLevouNaBoca == 1)
+            if (pontosDeBloqueio <= 0 || (pontosDeBloqueio > 0 && modoBloqueio != 2))
             {
-                PontosJogador2 -= danosaojogador;
-                if (PontosJogador2 < 0)
-                    PontosJogador2 = 0;
+
+
+                if (jogadorQueLevouNaBoca == 2)
+                {
+                    PontosJogador1 -= danosaojogador;
+                    if (PontosJogador1 < 0)
+                        PontosJogador1 = 0;
+
+                }
+                else
+                    if (jogadorQueLevouNaBoca == 1)
+                {
+                    PontosJogador2 -= danosaojogador;
+                    if (PontosJogador2 < 0)
+                        PontosJogador2 = 0;
+                }
             }
         }
 
